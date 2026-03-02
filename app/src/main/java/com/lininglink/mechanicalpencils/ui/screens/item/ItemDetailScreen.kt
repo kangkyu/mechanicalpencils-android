@@ -154,11 +154,31 @@ private fun ItemDetailContent(
             Spacer(modifier = Modifier.height(8.dp))
 
             item.maker?.let { maker ->
-                DetailRow(label = "Maker", value = maker.title)
+                DetailRow(label = "Brand", value = maker.title)
             }
 
             item.modelNumber?.let { modelNumber ->
                 DetailRow(label = "Model Number", value = modelNumber)
+            }
+
+            item.category?.let { category ->
+                DetailRow(label = "Category", value = category)
+            }
+
+            item.size?.let { size ->
+                DetailRow(label = "Size", value = size)
+            }
+
+            item.color?.let { color ->
+                DetailRow(label = "Color", value = color)
+            }
+
+            item.limitedEdition?.let { limitedEdition ->
+                DetailRow(label = "Limited Edition", value = limitedEdition)
+            }
+
+            item.influencer?.let { influencer ->
+                DetailRow(label = "Influencer", value = influencer.name)
             }
 
             Spacer(modifier = Modifier.height(24.dp))

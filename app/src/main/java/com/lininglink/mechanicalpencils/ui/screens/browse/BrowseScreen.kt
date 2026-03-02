@@ -59,7 +59,7 @@ fun BrowseScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Mechanical Pencils") },
+                title = { Text("Merch") },
                 actions = {
                     IconButton(onClick = onLogout) {
                         Icon(
@@ -81,7 +81,7 @@ fun BrowseScreen(
                 onQueryChange = viewModel::onSearchQueryChange,
                 onClear = viewModel::clearSearch,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                placeholder = "Search pencils..."
+                placeholder = "Search merch..."
             )
 
             when {

@@ -10,6 +10,7 @@ data class Item(
     val maker: String? = null,
     @SerialName("model_number")
     val modelNumber: String? = null,
+    val influencer: String? = null,
     @SerialName("image_url")
     val imageUrl: String? = null,
     val owned: Boolean = false
@@ -23,14 +24,16 @@ data class ItemDetail(
     val maker: Maker? = null,
     @SerialName("model_number")
     val modelNumber: String? = null,
-    @SerialName("tip_retractable")
-    val tipRetractable: String? = null,
-    @SerialName("eraser_attached")
-    val eraserAttached: String? = null,
-    @SerialName("jetpens_url")
-    val jetpensUrl: String? = null,
-    @SerialName("blick_url")
-    val blickUrl: String? = null,
+    val category: String? = null,
+    val size: String? = null,
+    val color: String? = null,
+    @SerialName("limited_edition")
+    val limitedEdition: String? = null,
+    @SerialName("shop_url")
+    val shopUrl: String? = null,
+    @SerialName("official_url")
+    val officialUrl: String? = null,
+    val influencer: ItemInfluencer? = null,
     @SerialName("image_url")
     val imageUrl: String? = null,
     @SerialName("thumbnail_url")
@@ -47,6 +50,14 @@ data class ItemDetail(
     val createdAt: String? = null,
     @SerialName("updated_at")
     val updatedAt: String? = null
+)
+
+@Serializable
+data class ItemInfluencer(
+    val id: Int,
+    val name: String,
+    val platform: String? = null,
+    val handle: String? = null
 )
 
 @Serializable

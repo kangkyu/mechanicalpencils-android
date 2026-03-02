@@ -10,6 +10,7 @@ data class CollectionItem(
     val maker: String? = null,
     @SerialName("model_number")
     val modelNumber: String? = null,
+    val influencer: String? = null,
     @SerialName("image_url")
     val imageUrl: String? = null,
     @SerialName("ownership_id")

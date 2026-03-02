@@ -17,6 +17,7 @@ data class UserProfileItem(
     val id: Int,
     val title: String,
     val maker: String? = null,
+    val influencer: String? = null,
     @SerialName("thumbnail_url")
     val thumbnailUrl: String? = null,
     @SerialName("has_proof")
