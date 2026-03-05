@@ -41,6 +41,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.lininglink.mechanicalpencils.data.model.ItemDetail
@@ -178,6 +179,72 @@ private fun ItemDetailContent(
 
             item.limitedEdition?.let { limitedEdition ->
                 DetailRow(label = "Limited Edition", value = limitedEdition)
+            }
+
+            item.amazonUrl?.let { amazonUrl ->
+                val uriHandler = LocalUriHandler.current
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { uriHandler.openUri(amazonUrl) }
+                        .padding(vertical = 4.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = "Amazon",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Text(
+                        text = "View",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+
+            item.jetpensUrl?.let { jetpensUrl ->
+                val uriHandler = LocalUriHandler.current
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { uriHandler.openUri(jetpensUrl) }
+                        .padding(vertical = 4.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = "JetPens",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Text(
+                        text = "View",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+
+            item.blickUrl?.let { blickUrl ->
+                val uriHandler = LocalUriHandler.current
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { uriHandler.openUri(blickUrl) }
+                        .padding(vertical = 4.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = "Blick",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Text(
+                        text = "View",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
             }
 
             item.influencers.forEach { influencer ->

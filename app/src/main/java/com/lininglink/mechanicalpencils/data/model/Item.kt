@@ -29,10 +29,14 @@ data class ItemDetail(
     val color: String? = null,
     @SerialName("limited_edition")
     val limitedEdition: String? = null,
-    @SerialName("shop_url")
-    val shopUrl: String? = null,
+    @SerialName("amazon_url")
+    val amazonUrl: String? = null,
     @SerialName("official_url")
     val officialUrl: String? = null,
+    @SerialName("jetpens_url")
+    val jetpensUrl: String? = null,
+    @SerialName("blick_url")
+    val blickUrl: String? = null,
     val influencers: List<ItemInfluencer> = emptyList(),
     @SerialName("image_url")
     val imageUrl: String? = null,
