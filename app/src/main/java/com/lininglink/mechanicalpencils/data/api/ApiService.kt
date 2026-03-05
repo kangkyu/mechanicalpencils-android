@@ -2,6 +2,8 @@ package com.lininglink.mechanicalpencils.data.api
 
 import com.lininglink.mechanicalpencils.data.model.AuthResponse
 import com.lininglink.mechanicalpencils.data.model.CollectionResponse
+import com.lininglink.mechanicalpencils.data.model.InfluencerDetailResponse
+import com.lininglink.mechanicalpencils.data.model.InfluencersResponse
 import com.lininglink.mechanicalpencils.data.model.ItemDetailResponse
 import com.lininglink.mechanicalpencils.data.model.ItemGroupDetailResponse
 import com.lininglink.mechanicalpencils.data.model.ItemGroupsResponse
@@ -96,6 +98,15 @@ class ApiService(private val client: HttpClient) {
                 append("_method", "patch")
             }
         ).body()
+    }
+
+    // Influencer endpoints
+    suspend fun getInfluencers(): InfluencersResponse {
+        return client.get("$BASE_URL/api/v1/influencers").body()
+    }
+
+    suspend fun getInfluencer(id: Int): InfluencerDetailResponse {
+        return client.get("$BASE_URL/api/v1/influencers/$id").body()
     }
 
     // Current user endpoint

@@ -5,12 +5,15 @@ import com.lininglink.mechanicalpencils.data.local.TokenManager
 import com.lininglink.mechanicalpencils.data.repository.AuthRepository
 import com.lininglink.mechanicalpencils.data.repository.CollectionRepository
 import com.lininglink.mechanicalpencils.data.repository.GroupRepository
+import com.lininglink.mechanicalpencils.data.repository.InfluencerRepository
 import com.lininglink.mechanicalpencils.data.repository.ItemRepository
 import com.lininglink.mechanicalpencils.data.repository.UserRepository
 import com.lininglink.mechanicalpencils.ui.screens.auth.AuthViewModel
 import com.lininglink.mechanicalpencils.ui.screens.browse.BrowseViewModel
 import com.lininglink.mechanicalpencils.ui.screens.collection.CollectionViewModel
 import com.lininglink.mechanicalpencils.ui.screens.groups.GroupsViewModel
+import com.lininglink.mechanicalpencils.ui.screens.influencer.InfluencerDetailViewModel
+import com.lininglink.mechanicalpencils.ui.screens.influencer.InfluencerListViewModel
 import com.lininglink.mechanicalpencils.ui.screens.item.ItemDetailViewModel
 import com.lininglink.mechanicalpencils.ui.screens.profile.UserProfileViewModel
 import com.lininglink.mechanicalpencils.ui.screens.settings.SettingsViewModel
@@ -70,11 +73,14 @@ val appModule = module {
     single { GroupRepository(get()) }
     single { CollectionRepository(get()) }
     single { UserRepository(get()) }
+    single { InfluencerRepository(get()) }
 
     // ViewModels
     viewModel { AuthViewModel(get()) }
     viewModel { BrowseViewModel(get()) }
     viewModel { params -> ItemDetailViewModel(params.get(), get()) }
+    viewModel { InfluencerListViewModel(get()) }
+    viewModel { params -> InfluencerDetailViewModel(params.get(), get()) }
     viewModel { GroupsViewModel(get()) }
     viewModel { CollectionViewModel(get()) }
     viewModel { params -> UserProfileViewModel(params.get(), get()) }

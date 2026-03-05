@@ -21,8 +21,9 @@ import com.lininglink.mechanicalpencils.ui.components.MaterialSymbol
 import com.lininglink.mechanicalpencils.ui.components.SymbolWeight
 import com.lininglink.mechanicalpencils.ui.navigation.Browse
 import com.lininglink.mechanicalpencils.ui.navigation.Collection
+import com.lininglink.mechanicalpencils.ui.navigation.Discover
 import com.lininglink.mechanicalpencils.ui.navigation.GroupDetail
-import com.lininglink.mechanicalpencils.ui.navigation.Groups
+import com.lininglink.mechanicalpencils.ui.navigation.InfluencerDetailRoute
 import com.lininglink.mechanicalpencils.ui.navigation.ItemDetail
 import com.lininglink.mechanicalpencils.ui.navigation.ProofUpload
 import com.lininglink.mechanicalpencils.ui.navigation.Settings
@@ -32,9 +33,12 @@ import com.lininglink.mechanicalpencils.ui.screens.browse.BrowseViewModel
 import com.lininglink.mechanicalpencils.ui.screens.collection.CollectionScreen
 import com.lininglink.mechanicalpencils.ui.screens.collection.CollectionViewModel
 import com.lininglink.mechanicalpencils.ui.screens.collection.ProofUploadScreen
+import com.lininglink.mechanicalpencils.ui.screens.discover.DiscoverScreen
 import com.lininglink.mechanicalpencils.ui.screens.groups.GroupDetailScreen
-import com.lininglink.mechanicalpencils.ui.screens.groups.GroupsListScreen
 import com.lininglink.mechanicalpencils.ui.screens.groups.GroupsViewModel
+import com.lininglink.mechanicalpencils.ui.screens.influencer.InfluencerDetailScreen
+import com.lininglink.mechanicalpencils.ui.screens.influencer.InfluencerDetailViewModel
+import com.lininglink.mechanicalpencils.ui.screens.influencer.InfluencerListViewModel
 import com.lininglink.mechanicalpencils.ui.screens.item.ItemDetailScreen
 import com.lininglink.mechanicalpencils.ui.screens.item.ItemDetailViewModel
 import com.lininglink.mechanicalpencils.ui.screens.profile.UserProfileScreen
@@ -61,6 +65,7 @@ fun MainScreen(
     val browseViewModel: BrowseViewModel = koinViewModel()
     val groupsViewModel: GroupsViewModel = koinViewModel()
     val collectionViewModel: CollectionViewModel = koinViewModel()
+    val influencerListViewModel: InfluencerListViewModel = koinViewModel()
 
     val bottomNavItems = listOf(
         BottomNavItem(
@@ -69,9 +74,9 @@ fun MainScreen(
             icon = "search"
         ),
         BottomNavItem(
-            route = Groups,
-            title = "Groups",
-            icon = "folder"
+            route = Discover,
+            title = "Discover",
+            icon = "explore"
         ),
         BottomNavItem(
             route = Collection,
@@ -155,16 +160,37 @@ fun MainScreen(
                     },
                     onUserClick = { userId ->
                         navController.navigate(UserProfile(userId))
+                    },
+                    onInfluencerClick = { influencerId ->
+                        navController.navigate(InfluencerDetailRoute(influencerId))
                     }
                 )
             }
 
-            // Groups Tab
-            composable<Groups> {
-                GroupsListScreen(
-                    viewModel = groupsViewModel,
+            // Discover Tab (Influencers + Groups)
+            composable<Discover> {
+                DiscoverScreen(
+                    influencerListViewModel = influencerListViewModel,
+                    groupsViewModel = groupsViewModel,
+                    onInfluencerClick = { influencerId ->
+                        navController.navigate(InfluencerDetailRoute(influencerId))
+                    },
                     onGroupClick = { groupId ->
                         navController.navigate(GroupDetail(groupId))
+                    }
+                )
+            }
+
+            composable<InfluencerDetailRoute> { backStackEntry ->
+                val route: InfluencerDetailRoute = backStackEntry.toRoute()
+                val influencerDetailViewModel: InfluencerDetailViewModel = koinViewModel(
+                    parameters = { parametersOf(route.influencerId) }
+                )
+                InfluencerDetailScreen(
+                    viewModel = influencerDetailViewModel,
+                    onNavigateBack = { navController.popBackStack() },
+                    onItemClick = { itemId ->
+                        navController.navigate(ItemDetail(itemId))
                     }
                 )
             }

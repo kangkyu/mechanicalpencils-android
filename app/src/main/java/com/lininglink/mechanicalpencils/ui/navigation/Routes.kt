@@ -18,6 +18,10 @@ object MainTabs
 @Serializable
 object Browse
 
+// Discover tab routes (influencers + groups)
+@Serializable
+object Discover
+
 @Serializable
 data class ItemDetail(val itemId: Int)
 
@@ -42,6 +46,13 @@ data class ProofUpload(
     val hasProof: Boolean,
     val proofUrl: String?
 )
+
+// Influencer routes
+@Serializable
+object Influencers
+
+@Serializable
+data class InfluencerDetailRoute(val influencerId: Int)
 
 // Profile route
 @Serializable

@@ -10,7 +10,7 @@ data class Item(
     val maker: String? = null,
     @SerialName("model_number")
     val modelNumber: String? = null,
-    val influencer: String? = null,
+    val influencers: List<String> = emptyList(),
     @SerialName("image_url")
     val imageUrl: String? = null,
     val owned: Boolean = false
@@ -33,7 +33,7 @@ data class ItemDetail(
     val shopUrl: String? = null,
     @SerialName("official_url")
     val officialUrl: String? = null,
-    val influencer: ItemInfluencer? = null,
+    val influencers: List<ItemInfluencer> = emptyList(),
     @SerialName("image_url")
     val imageUrl: String? = null,
     @SerialName("thumbnail_url")

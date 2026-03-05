@@ -53,7 +53,8 @@ fun ItemDetailScreen(
     viewModel: ItemDetailViewModel,
     onNavigateBack: () -> Unit,
     onOwnershipChanged: (itemId: Int, owned: Boolean) -> Unit = { _, _ -> },
-    onUserClick: (Int) -> Unit = {}
+    onUserClick: (Int) -> Unit = {},
+    onInfluencerClick: (Int) -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val isTogglingOwnership by viewModel.isTogglingOwnership.collectAsState()
@@ -112,7 +113,8 @@ fun ItemDetailScreen(
                         item = (uiState as ItemDetailUiState.Success).item,
                         isTogglingOwnership = isTogglingOwnership,
                         onToggleOwnership = viewModel::toggleOwnership,
-                        onUserClick = onUserClick
+                        onUserClick = onUserClick,
+                        onInfluencerClick = onInfluencerClick
                     )
                 }
             }
@@ -125,7 +127,8 @@ private fun ItemDetailContent(
     item: ItemDetail,
     isTogglingOwnership: Boolean,
     onToggleOwnership: () -> Unit,
-    onUserClick: (Int) -> Unit
+    onUserClick: (Int) -> Unit,
+    onInfluencerClick: (Int) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -177,8 +180,25 @@ private fun ItemDetailContent(
                 DetailRow(label = "Limited Edition", value = limitedEdition)
             }
 
-            item.influencer?.let { influencer ->
-                DetailRow(label = "Influencer", value = influencer.name)
+            item.influencers.forEach { influencer ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { onInfluencerClick(influencer.id) }
+                        .padding(vertical = 4.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = "Influencer",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Text(
+                        text = influencer.name,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.height(24.dp))
